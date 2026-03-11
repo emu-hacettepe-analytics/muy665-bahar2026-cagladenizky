@@ -5,7 +5,11 @@ sidebar: false
 
 ![](images/IMG_6584.jpg){fig-align="center" width="225"}
 
+<h1 style="color:darkblue;">
+
 # Eğitim
+
+</h1>
 
 -   M.S., Engineering Management, Hacettepe University, Turkey, 2026 - Ongoing.
 -   B.S., Economics, Uludag University, Turkey, 2013 - 2018.
