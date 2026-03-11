@@ -7,4 +7,4 @@ sidebar: false
 
 MUY665-İş Analitiği dersi sayfama hoş geldiniz.
 
-*Bu bölümde yapmış olduğum analitik çalışmalarımı paylaşıyor olacağım.*
+*Bu bölümde yapmış olduğum analitik çalışmalarımı paylaşıyor olacağım...*
