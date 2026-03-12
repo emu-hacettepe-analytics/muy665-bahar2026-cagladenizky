@@ -7,16 +7,24 @@ sidebar: false
 
 <h1 style="color:darkblue;">
 
-# Eğitim
+Eğitim
 
 </h1>
 
 -   M.S., Engineering Management, Hacettepe University, Turkey, 2026 - Ongoing.
 -   B.S., Economics, Uludag University, Turkey, 2013 - 2018.
 
-# İş Tecrübesi
+<h1 style="color:darkblue;">
 
-## Employements
+İş Tecrübesi
+
+</h1>
+
+<h2 style="color:blue;">
+
+Employements
+
+</h2>
 
 1.  Company Megart Teknology, Production Planning and Procurement Manager, 2025 - Present
 
@@ -26,9 +34,13 @@ sidebar: false
 
     Company Mebant, System and Process Development Specialist, 2021 - 2022
 
-3.  Company Billas Tire and Rubber, Quality Assurance Specialist, 2018 - 2021
+Company Billas Tire and Rubber, Quality Assurance Specialist, 2018 - 2021
 
-## Internships
+<h2 style="color:blue;">
+
+Internships
+
+</h2>
 
 1.  Company Pirelli, Human Resources Intern, 2016
 
