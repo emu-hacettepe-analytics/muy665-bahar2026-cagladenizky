@@ -133,7 +133,7 @@ Depo ve stok lokasyon yapısı oluşturulmuştır. Proje bazlı stok tutma senar
 
 <br>
 
-[📄 Özgeçmiş PDF İndir](CDY_CV.pdf)
+[📄 Özgeçmiş PDF İndir](CDY_Ozgecmis.pdf)
 
 <h2 style="color:darkgreen;">
 
