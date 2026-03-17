@@ -131,6 +131,8 @@ Depo ve stok lokasyon yapısı oluşturulmuştır. Proje bazlı stok tutma senar
 
 📍Kazanımlar: Stok doğruluğu artırıldı ve stok yönetimi optimize edilmiştir.
 
+<br>
+
 [📄 Özgeçmiş PDF İndir](CDY_CV.pdf)
 
 <h2 style="color:darkgreen;">
