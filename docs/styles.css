@@ -1,1 +1,14 @@
 /* css styles */
+h1 {
+  font-size: 32px;
+  color: #0b1f8a;   /* koyu mavi */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #1e40ff;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  
