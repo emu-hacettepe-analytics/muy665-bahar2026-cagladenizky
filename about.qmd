@@ -7,7 +7,7 @@ sidebar: false
 
 <h1 style="color:darkblue;">
 
-Eğitim
+# Eğitim
 
 </h1>
 
@@ -16,13 +16,13 @@ Eğitim
 
 <h1 style="color:darkblue;">
 
-İş Tecrübesi
+# Deneyimler
 
 </h1>
 
 <h4 style="color:blue;">
 
-Employements
+## İş Tecrübesi
 
 </h4>
 
@@ -40,7 +40,7 @@ Employements
 
 <h2 style="color:blue;">
 
-Internships
+## Stajlar
 
 </h2>
 
