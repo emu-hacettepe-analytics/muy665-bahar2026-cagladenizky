@@ -12,7 +12,7 @@ sidebar: false
 
 # Deneyimler
 
-## İş Tecrübesi
+## İş
 
 -   **Megart Teknoloji San. Tic. A.Ş.**
 
@@ -89,54 +89,14 @@ sidebar: false
 -   Netsis
 -   Problem Çözme Teknikleri (5Why, Ishikawa, 5N1K, Pareto)
 
-# Projeler
+# Hobiler
 
-**Canias ERP Devreye Alma Projesi**<br>
+-   Yüzme
 
-**Proje Yöneticisi (Ağustos 2025 - Devam Ediyor)**
+-   Yoga
 
-<br>
-
-ERP sisteminin uçtan uca devreye alınması kapsamında temel veri, kalite, satın alma ve envanter modüllerinin kurulumu ve süreç kurguları yönetildi.
-
-<br>
-
-*Temel Veri Yönetimi*<br>
-
-Malzeme kartlarının hammadde, yarı mamul, bitmiş ürün, sabit kıymet, fason vb. olarak sınıflandırılmıştır. Malzemeler için minimum sipariş miktarı, termin süresi, minimum güvenlik stoğu, kalite planları vb. kritik parametreler belirlenmiştir. Konfigürasyon ve revizyon takibi için kodlama kurgusunun yapılmıştır. Fason, yarı mamül ve bitmiş ürün BOM kurgusunun oluşturulmuştur. İş merkezi, üretim / montaj operasyonlarının ve fason operasyonlar tanımlanmıştır. Oluşturulan iş merkezleri ve operasyonlar ile rota girme sürecinin kurgulanmıştır. <br>
-
-📍Kazanımlar: Veri standardizasyonu sağlanarak süreçler içerisinde doğru veri kaynağı oluşturulmuştur.
-
-<br>
-
-*Kalite Yönetimi*<br>
-
-Hammaddeler için kalite kontrol planları, kontrol sıklıkları oluşturulmuştur. GKK sürecinde kontrollerin EPR üzerinden yapılması kurgulanmıştır. Yarı mamul ve bitmiş ürünler için ara ve final kalite planları tanımlanmıştır. Değişiklik yönetiminin ERP'den yapılabilmesi için BPM süreci kurgulanmıştır. Uygunsuzluk kayıtları için düzeltici faaliyet süreci kurgulanmıştır.
-
-📍Kazanımlar: Kalite kayıtlarının arşivlenmesi ve kalite sürecinde izlenmebilirlik, eskalasyon sağlanmıştır.
-
-<br>
-
-*Satınalma Yönetimi Modülü*<br>
-
-Talep , teklif, sipariş kurgusunun oluşturulmuştur. Fason siparişler ile fason izlenebilirliği sağlanmıştır.<br>
-
-📍Kazanımlar: Tedarikçi performans değerlendirme süreci için zamanında teslimat performası ve kalite performansı otomatik hesaplanabilmektedir. Fason süreçlerde izlenebilirllik sağlanmıştır.
-
-<br>
-
-*Envanter Yönetimi Modülü*<br>
-
-Depo ve stok lokasyon yapısı oluşturulmuştır. Proje bazlı stok tutma senaryosundan malzeme bazlı stok tutma ve rezervasyon sistemine geçilmiştir. Raf ömürlü malzemelerde raf ömrü ERP'ye entegre edilmiştir. Güvenlik stoğu kontrolleri kurgusu yapılmıştır.
-
-📍Kazanımlar: Stok doğruluğu artırıldı ve stok yönetimi optimize edilmiştir.
+-   Seyahat
 
 <br>
 
 [📄 Özgeçmiş PDF İndir](CDY_Ozgecmis.pdf)
-
-<h2 style="color:darkgreen;">
-
-Başlık
-
-</h2>
