@@ -8,13 +8,13 @@ h1 {
 
 h2 {
   font-size: 24px;
-  color: #e0ff;
-  margin-top: 20px;
-  margin-bottom: 8px;
-  
-h3 {
-  font-size: 24px;
   color: #1e40ff;
   margin-top: 20px;
   margin-bottom: 8px;
-  
+  font-weight: normal;
+}
+/* PARAGRAF BOŞLUKLARINI KALDIR */
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}

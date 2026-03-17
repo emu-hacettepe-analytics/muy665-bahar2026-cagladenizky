@@ -5,84 +5,133 @@ sidebar: false
 
 ![](images/IMG_6584.jpg){fig-align="center" width="225"}
 
-<h1 style="color:darkblue;">
-
 # Eğitim
-
-</h1>
 
 -   Yüksek Lisans, Mühendislik Yönetimi, Hacettepe Üniversitesi, 2026 - Devam Ediyor
 -   Lisans, İktisat, Uludağ Üniversitesi, 2013 - 2018
 
-<h1 style="color:darkblue;">
-
 # Deneyimler
 
-</h1>
-
-<h4 style="color:blue;">
-
 ## İş Tecrübesi
-
-</h4>
 
 -   **Megart Teknoloji San. Tic. A.Ş.**
 
     Üretim Planlama ve Satın Alma Müdürü (Ekim 2025 - Devam Ediyor)<br>Satın Alma Uzmanı (Ağustos 2023 - Ekim 2025)
 
+    <br>
+
 -   **Mebant İzolasyon ve Bant San. A.Ş.**
 
     Sistem ve Süreç Geliştirme Yöneticisi (Ocak 2023 - Ağustos 2023)<br>Sistem ve Süreç Geliştirme Uzmanı (Kasım 2021 - Aralık 2022)
+
+    <br>
 
 -   **Billas Lastik ve Kauçuk San. Tic. A.Ş.**
 
     Kalite Yönetim Sistemleri Sorumlusu (Eylül 2018 - Kasım 2021
 
-<h2 style="color:blue;">
+    <br>
 
 ## Stajlar
-
-</h2>
 
 -   **Türk Pirelli Lastikleri A.Ş.**
 
     İnsan Kaynakları Stajyeri (Ağustos 2016 - Eylül 2016)
 
-<h1 style="color:darkblue;">
-
 # Sertifikalar
-
-</h1>
 
 -   **MMOG/LE V.6**<br> Ford Motor Company
 
+    <br>
+
 -   **IATF 16949:2016 Otomotiv Kalite Yönetim Sistemleri – Bilgilendirme Eğitimi**<br> (Sertifika No: 2023028) – Redline Denetim & Eğitim Hizmetleri
+
+    <br>
 
 -   **ISO 19011 İç Tetkikçi Sertifikası**<br> (Sertifika No: 2023048) – Redline Denetim & Eğitim Hizmetleri
 
+    <br>
+
 -   **AIAG & VDA FMEA V1**<br> (Sertifika No: 2023001) – Redline Denetim & Eğitim Hizmetleri
+
+    <br>
 
 -   **VDA 6.3 Proses İç Tetkikçisi & VDA – Alman Otomotiv KYS Bilinç Eğitimi**<br> (Sertifika No: RIS25062022.02) – Redline Denetim & Eğitim Hizmetleri
 
+    <br>
+
 -   **IATF 16949:2016 İPK Eğitimi (MSA 4th, SPC 2nd)**<br> (Sertifika No: RIS26072022.02) – Redline Denetim & Eğitim Hizmetleri
+
+    <br>
 
 -   **ISO 14001:2015 Çevre Yönetim Sistemleri – Bilgilendirme Eğitimi**<br> (Sertifika No: 40079) – Gelişim Yönetim Sistemleri A.Ş.
 
+    <br>
+
 -   **Sürdürülebilir Satın Alma**<br>Demirci Eğitim & Danışmanlık
+
+    <br>
 
 -   **A’dan Z’ye Etkili İletişim**<br> (Sertifika No: UC-YSB2O31W) – Udemy
 
+    <br>
+
 -   **Kaizen – Değişim ve Sürekli İyileştirme**<br> (Sertifika No: 2866) – Elginkan Vakfı
 
-# Publications
+# Yetenekler
 
-1.  Dasdemir, E., Batta, R., Koksalan, M., Tezcaner Ozturk, D. (2022) “UAV Routing for Reconnaissance Mission: A Multi-Objective Orienteering Problem with Time-Dependent Prizes and Multiple Connections”, Computers & Operations Research, 145: 105882.
+-   Microsoft Office Programları (İleri Düzeyde)
+-   Canias ERP
+-   QDMS Entegre Yönetim Sistemleri
+-   Freedom ERP
+-   Altasoft E-FMEA
+-   CoralReef MES
+-   Netsis
+-   Problem Çözme Teknikleri (5Why, Ishikawa, 5N1K, Pareto)
 
-# Competencies
+# Projeler
 
-R, Quarto, Git, Python
+**Canias ERP Devreye Alma Projesi**<br>
 
-# Hobbies
+**Proje Yöneticisi (Ağustos 2025 - Devam Ediyor)**
+
+<br>
+
+ERP sisteminin uçtan uca devreye alınması kapsamında temel veri, kalite, satın alma ve envanter modüllerinin kurulumu ve süreç kurguları yönetildi.
+
+<br>
+
+*Temel Veri Yönetimi*<br>
+
+Malzeme kartlarının hammadde, yarı mamul, bitmiş ürün, sabit kıymet, fason vb. olarak sınıflandırılmıştır. Malzemeler için minimum sipariş miktarı, termin süresi, minimum güvenlik stoğu, kalite planları vb. kritik parametreler belirlenmiştir. Konfigürasyon ve revizyon takibi için kodlama kurgusunun yapılmıştır. Fason, yarı mamül ve bitmiş ürün BOM kurgusunun oluşturulmuştur. İş merkezi, üretim / montaj operasyonlarının ve fason operasyonlar tanımlanmıştır. Oluşturulan iş merkezleri ve operasyonlar ile rota girme sürecinin kurgulanmıştır. <br>
+
+📍Kazanımlar: Veri standardizasyonu sağlanarak süreçler içerisinde doğru veri kaynağı oluşturulmuştur.
+
+<br>
+
+*Kalite Yönetimi*<br>
+
+Hammaddeler için kalite kontrol planları, kontrol sıklıkları oluşturulmuştur. GKK sürecinde kontrollerin EPR üzerinden yapılması kurgulanmıştır. Yarı mamul ve bitmiş ürünler için ara ve final kalite planları tanımlanmıştır. Değişiklik yönetiminin ERP'den yapılabilmesi için BPM süreci kurgulanmıştır. Uygunsuzluk kayıtları için düzeltici faaliyet süreci kurgulanmıştır.
+
+📍Kazanımlar: Kalite kayıtlarının arşivlenmesi ve kalite sürecinde izlenmebilirlik, eskalasyon sağlanmıştır.
+
+<br>
+
+*Satınalma Yönetimi Modülü*<br>
+
+Talep , teklif, sipariş kurgusunun oluşturulmuştur. Fason siparişler ile fason izlenebilirliği sağlanmıştır.<br>
+
+📍Kazanımlar: Tedarikçi performans değerlendirme süreci için zamanında teslimat performası ve kalite performansı otomatik hesaplanabilmektedir. Fason süreçlerde izlenebilirllik sağlanmıştır.
+
+<br>
+
+*Envanter Yönetimi Modülü*<br>
+
+Depo ve stok lokasyon yapısı oluşturulmuştır. Proje bazlı stok tutma senaryosundan malzeme bazlı stok tutma ve rezervasyon sistemine geçilmiştir. Raf ömürlü malzemelerde raf ömrü ERP'ye entegre edilmiştir. Güvenlik stoğu kontrolleri kurgusu yapılmıştır.
+
+📍Kazanımlar: Stok doğruluğu artırıldı ve stok yönetimi optimize edilmiştir.
+
+[📄 Özgeçmiş PDF İndir](CDY_CV.pdf)
 
 <h2 style="color:darkgreen;">
 
