@@ -3,14 +3,12 @@ title: "Çalışma 1"
 ---
 
 \
-(Aşağıdakiler örnek olarak verilmiştir.)
+Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler
 
-Bu çalışmada 3 görevimiz var. Bu görevler..... Bunlara sırayla aşağıda cevap arıyoruz.
-
-## (a)
+## (a) Özet
 
 ```{r}
 1 + 1
 ```
 
-## (b)
+## (b) Sorular
