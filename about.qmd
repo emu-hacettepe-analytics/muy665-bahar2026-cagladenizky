@@ -99,4 +99,4 @@ sidebar: false
 
 <br>
 
-[📄 Özgeçmiş PDF İndir](CDY_Ozgecmis.pdf)
+[📄 Özgeçmiş PDF İndir](Ozgecmis_CaglaDenizYigin.pdf)
