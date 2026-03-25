@@ -2,9 +2,11 @@
 title: "Çalışma 1"
 ---
 
-## Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler
+## Ödev
 
 <br>
+
+### Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Mustafa Baydoğan & Erdi Dasdemir Video Özeti
 
 [Video İçin Tıklayınız!](https://www.youtube.com/watch?v=1Mvkn71dhaA)
 
@@ -16,12 +18,138 @@ Videoda veri bilimi ile endüstri mühendisliği arasındaki ilişki anlatılmak
 
 ### Sorular
 
-1)Videoya göre endüstri mühendisliği ile veri bilimi arasındaki ilişki nedir? Veri biliminin endüstri mühendisliğinde kullanıldığı bazı alanları örnek vererek açıklayınız.
+**1)**Videoya göre endüstri mühendisliği ile veri bilimi arasındaki ilişki nedir? Veri biliminin endüstri mühendisliğinde kullanıldığı bazı alanları örnek vererek açıklayınız.
+
+<br>
 
 *Videoya göre endüstri mühendisliği veri odaklı bir disiplindir ve karar verme süreçlerinde veri analizinden yoğun şekilde yararlanır. Veri bilimi teknikleri kullanılarak üretim planlama, tedarik zinciri optimizasyonu, rota planlama, kalite kontrol ve talep tahmini gibi alanlarda daha doğru ve veriye dayalı kararlar alınabilir. Bu sayede süreçlerin verimliliği artırılabilir ve sistemler daha etkin şekilde yönetilebilir.*
 
+<br>
+
+**2)**Videoya göre makine öğrenmesi, optimizasyon, çok kriterli karar verme (MCDM) ve istatistiksel modelleme yöntemleri genellikle hangi tür problemlerin çözümünde kullanılır?
+
+<br>
+
+***A)** Sadece tek bir hedefin olduğu basit problemlerde*<br> ***B)** Birden fazla hedef veya kriterin birlikte değerlendirilmesi gereken problemlerde*<br> ***C)** Sadece finans ve muhasebe işlemlerinde*<br> ***D)** Yalnızca veri depolama işlemlerinde*<br>
+
+<br>
+
+### Veri Setinde Görevler
+
 ```{r}
-1 + 1
+#Veri Setini İçeri Aktarma"
+
+library(dslabs)
+library(DT)
+
+datatable(
+  polls_us_election_2016,
+  class = "compact",
+  options = list(
+    pageLength = 25,
+    scrollX = TRUE,
+    scrollY = "700px"
+  )
+) |> 
+  htmltools::div(style = "font-size:9px;")
 ```
 
-## (b) Sorular
+```{r}
+#Değişken Tanımlama#
+
+my_first <- "Cagla"
+my_birth_year <- 1995
+k <- (nchar(my_first) + my_birth_year) %% 15 + 8
+k
+```
+
+```{r}
+#Toplam NA (Eksik Veri) Sayısı#
+
+sum(is.na(polls_us_election_2016))
+
+```
+
+```{r}
+#İlk 8 Sütunda NA Sayısı#
+
+na_counts <- colSums(is.na(polls_us_election_2016))
+
+na_table <- data.frame(
+  `Sütun Adı` = names(na_counts),
+  `NA Sayısı` = na_counts,
+  row.names = NULL,
+  check.names = FALSE
+)
+
+na_table <- na_table[order(-na_table$`NA Sayısı`), ]
+
+DT::datatable(
+  head(na_table, 8),
+  rownames = FALSE,
+  options = list(
+    dom = 't',
+    paging = FALSE,
+    searching = FALSE,
+    info = FALSE
+  )
+)
+```
+
+```{r}
+
+#NA Değerleri Düzenleme İçin Yeni Data Oluşturma#
+
+library(dslabs)
+
+new_data <- dslabs::polls_us_election_2016
+
+datatable(
+  new_data,
+  class = "compact",
+  options = list(
+    pageLength = 25,
+    scrollX = TRUE,
+    scrollY = "700px"
+  )
+) |> 
+  htmltools::div(style = "font-size:9px;")
+
+#Yeni Datada Verileri Düzenleme#
+
+for (col in names(new_data)) {
+  if (is.numeric(new_data[[col]])) {
+    new_data[[col]][is.na(new_data[[col]])] <- my_birth_year + k
+  } else if (is.character(new_data[[col]])) {
+    new_data[[col]][is.na(new_data[[col]])] <- paste0(my_first, "_", k)
+  } else if (is.factor(new_data[[col]])) {
+    new_data[[col]] <- as.character(new_data[[col]])
+    new_data[[col]][is.na(new_data[[col]])] <- paste0(my_first, "_", k)
+  }
+}
+datatable(
+  new_data,
+  class = "compact",
+  options = list(
+    pageLength = 25,
+    scrollX = TRUE,
+    scrollY = "700px"
+  )
+) |> 
+  htmltools::div(style = "font-size:9px;")
+```
+
+## Sonuç
+
+```{r}
+
+#Sonuç Kontrol#
+
+
+sum(is.na(new_data))
+
+anyNA(new_data)
+
+```
+
+## 
