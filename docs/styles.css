@@ -18,3 +18,11 @@ p {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+h3 {
+  font-size: 22px;
+  color: #1e40ff;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-weight: normal;
+}

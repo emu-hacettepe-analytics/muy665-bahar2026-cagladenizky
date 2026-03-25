@@ -2,10 +2,23 @@
 title: "Çalışma 1"
 ---
 
-\
-Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler
+## Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler
 
-## (a) Özet
+<br>
+
+[Video İçin Tıklayınız!](https://www.youtube.com/watch?v=1Mvkn71dhaA)
+
+<br>
+
+Videoda veri bilimi ile endüstri mühendisliği arasındaki ilişki anlatılmaktadır. Veri biliminin; istatistik, programlama ve makine öğrenmesi yöntemlerini kullanarak verilerden anlamlı sonuçlar elde etmeyi ve geleceğe yönelik tahminler yapmayı amaçladığı belirtilmiştir. Ayrıca üretim planlama, tedarik zinciri yönetimi ve lojistik gibi alanlarda veri analizi ve optimizasyon yöntemlerinin kullanılarak daha doğru ve verimli kararlar alınabileceği vurgulanmıştır. Bu nedenle veri bilimi, mühendislik problemlerinin çözümünde önemli bir araç olarak ifade edilmektedir.
+
+<br>
+
+### Sorular
+
+1)Videoya göre endüstri mühendisliği ile veri bilimi arasındaki ilişki nedir? Veri biliminin endüstri mühendisliğinde kullanıldığı bazı alanları örnek vererek açıklayınız.
+
+*Videoya göre endüstri mühendisliği veri odaklı bir disiplindir ve karar verme süreçlerinde veri analizinden yoğun şekilde yararlanır. Veri bilimi teknikleri kullanılarak üretim planlama, tedarik zinciri optimizasyonu, rota planlama, kalite kontrol ve talep tahmini gibi alanlarda daha doğru ve veriye dayalı kararlar alınabilir. Bu sayede süreçlerin verimliliği artırılabilir ve sistemler daha etkin şekilde yönetilebilir.*
 
 ```{r}
 1 + 1
