@@ -332,14 +332,14 @@
     "href": "proje.html#veri-kaynağı",
     "title": "Ankara’da Su Kullanımı ve Baraj Doluluk Oranı Tahmini",
     "section": "2.1 Veri Kaynağı",
-    "text": "2.1 Veri Kaynağı\nVeriler ASKİ kaynaklarından, açık kamu verilerinden ve meteorolojik gözlem verilerinden derlenmiştir. Güncel baraj doluluk verisi ASKİ’nin baraj doluluk sayfasından R ortamında çekilmektedir:\nhttps://www.aski.gov.tr/tr/baraj.aspx\nKullanılan yerel dosyalar data/ klasöründe tutulmalıdır.\nÖnerilen dosya yapısı:\nproje.qmd\ndata/\n  Aylik_Baraj_Su_Miktari.xlsx\n  Ankara Yağış Verileri (2023-2026).xlsx\n  DAGITILAN CEKILEN VE KIS BASI CEKILEN.xls\n  ANKARA DAGITILAN SU MIKTARI.xls\n  sular nereden geliyor.xls\nDosya adları farklıysa kod içindeki aday dosya adlarına ekleme yapılabilir."
+    "text": "2.1 Veri Kaynağı\nVeriler ASKİ kaynaklarından, açık kamu verilerinden ve meteorolojik gözlem verilerinden derlenmiştir. Güncel baraj doluluk verisi ASKİ’nin baraj doluluk sayfasından R ortamında çekilmektedir:\nhttps://www.aski.gov.tr/tr/baraj.aspx\nKullanılan yerel dosyalar data/ klasöründe tutulmalıdır.\nÖnerilen dosya yapısı:\nproje.qmd\ndata/\n  Aylik_Baraj_Su_Miktari.xlsx\n  Ankara Yağış Verileri (2023-2026).xlsx\n  DAGITILAN CEKILEN VE KIS BASI CEKILEN.xls\n  ANKARA DAGITILAN SU MIKTARI.xls\n  sular nereden geliyor.xls\nDosya adları farklıysa kod içindeki aday dosya adlarına ekleme yapılabilir.\nKaynakça ASKİ Genel Müdürlüğü. (2026). Ankara Baraj Doluluk Oranları ve İstatistiki Veriler Raporu. Ankara Büyükşehir Belediyesi. Türkiye İstatistik Kurumu (TÜİK). (2024). Belediye Su ve Atıksu İstatistikleri Bülteni. TÜİK Haber Merkezi. Meteoroloji Genel Müdürlüğü. (2026). Ankara İli Tarihsel Yağış ve Sıcaklık İstatistikleri Veritabanı."
   },
   {
     "objectID": "proje.html#veri-hakkında-genel-bilgiler",
     "href": "proje.html#veri-hakkında-genel-bilgiler",
     "title": "Ankara’da Su Kullanımı ve Baraj Doluluk Oranı Tahmini",
     "section": "2.2 Veri Hakkında Genel Bilgiler",
-    "text": "2.2 Veri Hakkında Genel Bilgiler\nBarajlara gelen su, çekilen su, dağıtılan su ve mevcut baraj su hacmi metreküp cinsindedir. Yağış verisi ise milimetre cinsindedir. Bu nedenle yağış doğrudan hacim olarak değil, barajlara gelen suyu açıklamaya yardımcı iklimsel bir değişken olarak kullanılmıştır.\nBaraj doluluk tahmininde temel formül şu şekildedir:\n[ Tahmini Mevcut Su_{t+1} = Güncel Mevcut Su_t + Net Su Dengesi_t ]\n[ Net Su Dengesi_t = Tahmini Gelen Su_t - Tahmini Tüketim_t ]\n[ Tahmini Doluluk Oranı_t = ]"
+    "text": "2.2 Veri Hakkında Genel Bilgiler\nBarajlara gelen su, çekilen su, dağıtılan su ve mevcut baraj su hacmi metreküp cinsindedir. Yağış verisi ise milimetre cinsindedir. Bu nedenle yağış doğrudan hacim olarak değil, barajlara gelen suyu açıklamaya yardımcı iklimsel bir değişken olarak kullanılmıştır.\nBaraj doluluk tahmininde temel formül şu şekildedir:\n\\[Tahmini\\ Mevcut\\ Su_{t+1} = Güncel\\ Mevcut\\ Su_t + Net\\ Su\\ Dengesi_t\\]\n\\[Net\\ Su\\ Dengesi_t = Tahmini\\ Gelen\\ Su_t - Tahmini\\ Tüketim_t\\] \\[Tahmini\\ Doluluk\\ Oranı_t = \\frac{Tahmini\\ Mevcut\\ Su_t}{Toplam\\ Baraj\\ Kapasitesi} \\times 100\\]"
   },
   {
     "objectID": "proje.html#tercih-sebebi",

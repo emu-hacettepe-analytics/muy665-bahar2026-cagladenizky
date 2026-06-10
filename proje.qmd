@@ -61,8 +61,12 @@ data/
   ANKARA DAGITILAN SU MIKTARI.xls
   sular nereden geliyor.xls
 ```
-
 Dosya adları farklıysa kod içindeki aday dosya adlarına ekleme yapılabilir.
+
+Kaynakça
+ASKİ Genel Müdürlüğü. (2026). Ankara Baraj Doluluk Oranları ve İstatistiki Veriler Raporu. Ankara Büyükşehir Belediyesi.
+Türkiye İstatistik Kurumu (TÜİK). (2024). Belediye Su ve Atıksu İstatistikleri Bülteni. TÜİK Haber Merkezi.
+Meteoroloji Genel Müdürlüğü. (2026). Ankara İli Tarihsel Yağış ve Sıcaklık İstatistikleri Veritabanı.
 
 ## Veri Hakkında Genel Bilgiler
 
@@ -70,17 +74,12 @@ Barajlara gelen su, çekilen su, dağıtılan su ve mevcut baraj su hacmi metrek
 
 Baraj doluluk tahmininde temel formül şu şekildedir:
 
-\[
-Tahmini\ Mevcut\ Su_{t+1} = Güncel\ Mevcut\ Su_t + Net\ Su\ Dengesi_t
-\]
+$$Tahmini\ Mevcut\ Su_{t+1} = Güncel\ Mevcut\ Su_t + Net\ Su\ Dengesi_t$$
 
-\[
-Net\ Su\ Dengesi_t = Tahmini\ Gelen\ Su_t - Tahmini\ Tüketim_t
-\]
+$$Net\ Su\ Dengesi_t = Tahmini\ Gelen\ Su_t - Tahmini\ Tüketim_t$$
+$$Tahmini\ Doluluk\ Oranı_t = \frac{Tahmini\ Mevcut\ Su_t}{Toplam\ Baraj\ Kapasitesi} \times 100$$
 
-\[
-Tahmini\ Doluluk\ Oranı_t = \frac{Tahmini\ Mevcut\ Su_t}{Toplam\ Baraj\ Kapasitesi} \times 100
-\]
+
 
 ## Tercih Sebebi
 
