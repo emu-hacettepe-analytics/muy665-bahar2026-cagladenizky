@@ -489,8 +489,14 @@ aski_veri_cek <- function(url) {
 
 baraj_detay <- tryCatch(
   {
-    aski_veri_cek(aski_url) |>
+    gelen_veri <- aski_veri_cek(aski_url) |>
       mutate(veri_kaynagi = "ASKİ web sayfası")
+
+    if (nrow(gelen_veri) < 10) {
+      stop("ASKİ verisi eksik geldi, manuel tablo kullanılacak.")
+    }
+
+    gelen_veri
   },
   error = function(e) {
     tibble(
@@ -507,40 +513,16 @@ baraj_detay <- tryCatch(
         "Türkşerefli Barajı"
       ),
       toplam_hacim_m3 = c(
-        52445000,
-        1108276000,
-        22961000,
-        93452000,
-        542000,
-        85228000,
-        95000000,
-        91762000,
-        59525000,
-        5668500
+        52445000, 1108276000, 22961000, 93452000, 542000,
+        85228000, 95000000, 91762000, 59525000, 5668500
       ),
       mevcut_su_m3 = c(
-        42436000,
-        442928000,
-        16339000,
-        74979000,
-        542000,
-        58130000,
-        95000000,
-        29670000,
-        16360000,
-        295000
+        42436000, 442928000, 16339000, 74979000, 542000,
+        58130000, 95000000, 29670000, 16360000, 295000
       ),
       doluluk_yuzde = c(
-        80.92,
-        39.97,
-        71.16,
-        80.23,
-        100.00,
-        68.21,
-        100.00,
-        32.33,
-        27.48,
-        5.20
+        80.92, 39.97, 71.16, 80.23, 100.00,
+        68.21, 100.00, 32.33, 27.48, 5.20
       ),
       veri_kaynagi = "Manuel yedek tablo"
     )
@@ -607,6 +589,9 @@ aritilan_su_yillik |>
     caption = "Arıtılan içme ve kullanma suyu miktarı"
   ) |>
   kable_styling(full_width = FALSE)
+
+
+
 ```
 
 # Analiz
