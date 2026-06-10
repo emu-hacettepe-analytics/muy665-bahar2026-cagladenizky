@@ -18,7 +18,7 @@ website:
           - text: Ödevler
             href: portfolyo.qmd
           - text: Proje
-            href: proje.qmd
+            href: proje.html
             
     tools:
       - icon: github
