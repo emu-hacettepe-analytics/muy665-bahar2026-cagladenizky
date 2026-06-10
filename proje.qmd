@@ -1,5 +1,5 @@
 ---
-title: "Ankara'da Su Kullanımı ve Baraj Doluluk Oranı Tahmini"
+title: "Ankara'da Su Kullanımı, Yağış ve Baraj Doluluk Durumu Analizi"
 author: "Parlayan Yıldızlar Takımı"
 date: "2026-05-21"
 number-sections: true
@@ -18,9 +18,9 @@ execute:
 
 **Projemizle ilgili güncellemelerden haberdar olmak için proje sayfamızı takip edebilirsiniz.**
 
-# Proje Genel Bakış ve Kapsamı
+# 🎯 Proje Genel Bakış ve Kapsamı
 
-Ankara'da su yönetimi, nüfus artışı, kentleşme, iklimsel dalgalanmalar ve barajlara bağımlı içme-kullanma suyu sistemi nedeniyle giderek daha kritik hale gelmektedir. Bu projenin amacı, Ankara'daki su kullanım verilerini, barajlara gelen su miktarını, yağış verilerini ve güncel baraj doluluk durumunu birlikte inceleyerek önümüzdeki aylar için kısa dönemli bir baraj doluluk oranı tahmini oluşturmaktır.
+Ankara'da su yönetimi, nüfus artışı, kentleşme, iklimsel dalgalanmalar ve barajlara bağımlı içme-kullanma suyu sistemi nedeniyle giderek daha kritik hale gelmektedir. Bu projenin amacı, Ankara'daki su kullanım verilerini, barajlara gelen su miktarını, yağış verilerini ve güncel baraj doluluk durumunu birlikte inceleyerek Ankara su sisteminin arz, talep ve mevcut stok yapısını keşifsel veri analizi ile değerlendirmektir. Çalışmanın sonunda, kesin bir tahmin modeli kurmak yerine farklı su girişi varsayımlarına dayalı kurak, normal ve iyimser senaryo analizi yapılmıştır.
 
 Çalışmada cevap aranan temel sorular şunlardır:
 
@@ -28,11 +28,11 @@ Ankara'da su yönetimi, nüfus artışı, kentleşme, iklimsel dalgalanmalar ve 
 2. Barajlara gelen su miktarında belirgin bir mevsimsellik var mıdır?
 3. Yağış miktarı ile barajlara gelen su miktarı arasında nasıl bir ilişki vardır?
 4. Ankara'da dağıtılan ve çekilen su miktarı yıllar içinde nasıl değişmiştir?
-5. Güncel baraj su hacmi ve tahmini aylık net su dengesi kullanılarak önümüzdeki aylar için baraj doluluk oranı nasıl değişebilir?
+5. Güncel baraj su hacmi, aylık su girişi ve tüketim göstergeleri birlikte değerlendirildiğinde farklı su girişi senaryolarında baraj doluluk durumu nasıl değişebilir?
 
-Bu çalışma kesin bir hidrolojik tahmin modeli değil, açık veri kaynaklarına dayanan keşifsel ve karar destek amaçlı kısa dönemli bir su dengesi analizidir.
+Bu çalışma kesin bir hidrolojik tahmin modeli değildir. Açık veri kaynaklarına dayanan keşifsel veri analizi ve karar destek amaçlı senaryo analizi olarak değerlendirilmelidir.
 
-# Veri
+# 📊 Veri
 
 Bu çalışmada aşağıdaki veri bileşenleri kullanılmıştır:
 
@@ -42,11 +42,19 @@ Bu çalışmada aşağıdaki veri bileşenleri kullanılmıştır:
 4. **Güncel baraj doluluk verisi:** ASKİ baraj sayfasından çekilen baraj bazlı toplam hacim, mevcut su miktarı ve doluluk oranı bilgisidir.
 5. **Arıtılan içme ve kullanma suyu miktarı:** 2023-2024 gerçekleşme, 2025-2026 performans programı/hedef değeri olarak kullanılmıştır.
 
-## Veri Kaynağı
+## 🌐 Veri Kaynakları ve Altyapı
 
-Veriler ASKİ kaynaklarından, açık kamu verilerinden ve meteorolojik gözlem verilerinden derlenmiştir. Güncel baraj doluluk verisi ASKİ'nin baraj doluluk sayfasından R ortamında çekilmektedir:
+Veriler ASKİ kaynaklarından, açık kamu verilerinden ve meteorolojik gözlem verilerinden derlenmiştir. Güncel baraj doluluk verisi ASKİ baraj doluluk sayfasındaki baraj bazlı kapasite ve mevcut su değerleri temel alınarak manuel tablo şeklinde kullanılmıştır. Otomatik web çekiminde eksik tablo gelme riski olduğu için analizde tam baraj sistemiyle uyumlu manuel tablo tercih edilmiştir.
 
-`https://www.aski.gov.tr/tr/baraj.aspx`
+Aşağıdaki tablo, kullanılan veri bileşenlerini ve analizdeki rollerini özetlemektedir.
+
+| Veri bileşeni | Kaynak / dosya | Analizdeki rolü |
+|---|---|---|
+| Aylık barajlara gelen su miktarı | ASKİ / `baraj_su.xlsx` | Su arzının aylık ve yıllık değişimini incelemek |
+| Ankara yağış verisi | Meteorolojik gözlem verisi / `yagis.xlsx` | Yağış ile barajlara gelen su arasındaki ilişkiyi değerlendirmek |
+| Dağıtılan, çekilen ve kişi başı çekilen su | ASKİ / açık veri / `dagitilan_cekilen.xlsx` | Talep tarafındaki uzun dönemli değişimi yorumlamak |
+| Suyun kaynaklara göre dağılımı | ASKİ / açık veri / `sular_nereden_geliyor.xlsx` | Ankara'nın su arzında hangi kaynakların öne çıktığını görmek |
+| Güncel baraj doluluk durumu | ASKİ baraj sayfası temel alınarak manuel tablo | Mevcut stok durumunu ve senaryo analizinin başlangıç düzeyini göstermek |
 
 Kullanılan yerel dosyalar `data/` klasöründe tutulmalıdır.
 
@@ -55,37 +63,55 @@ Kullanılan yerel dosyalar `data/` klasöründe tutulmalıdır.
 ```text
 proje.qmd
 data/
-  Aylik_Baraj_Su_Miktari.xlsx
-  Ankara Yağış Verileri (2023-2026).xlsx
-  DAGITILAN CEKILEN VE KIS BASI CEKILEN.xls
-  ANKARA DAGITILAN SU MIKTARI.xls
-  sular nereden geliyor.xls
+  baraj_su.xlsx
+  yagis.xlsx
+  dagitilan_cekilen.xlsx
+  dagitilan_su.xlsx
+  sular_nereden_geliyor.xlsx
 ```
+
 Dosya adları farklıysa kod içindeki aday dosya adlarına ekleme yapılabilir.
 
-Kaynakça
-ASKİ Genel Müdürlüğü. (2026). Ankara Baraj Doluluk Oranları ve İstatistiki Veriler Raporu. Ankara Büyükşehir Belediyesi.
-Türkiye İstatistik Kurumu (TÜİK). (2024). Belediye Su ve Atıksu İstatistikleri Bülteni. TÜİK Haber Merkezi.
-Meteoroloji Genel Müdürlüğü. (2026). Ankara İli Tarihsel Yağış ve Sıcaklık İstatistikleri Veritabanı.
+## ℹ️ Veri Setlerinin Yapısı
 
-## Veri Hakkında Genel Bilgiler
+Barajlara gelen su verisinde temel değişkenler yıl, ay ve gelen su miktarıdır. Gelen su miktarı metreküp cinsindedir ve analizde daha okunabilir olması için milyon metreküpe dönüştürülmüştür.
+
+Yağış verisinde tarih veya tarih-saat bilgisi ve yağış miktarı yer almaktadır. Günlük ya da saatlik yapıdaki yağış değerleri aylık toplam yağışa dönüştürülmüş, böylece aylık baraj su girişi verisiyle aynı zaman ölçeğinde karşılaştırılabilir hale getirilmiştir.
+
+Su kullanım verisinde dağıtılan su, çekilen su ve kişi başı günlük su kullanımı göstergeleri bulunmaktadır. Bu değişkenler Ankara'da talep tarafındaki değişimi yorumlamak için kullanılmıştır.
+
+Güncel baraj doluluk verisinde baraj adı, toplam hacim, mevcut su miktarı ve doluluk oranı bilgileri bulunmaktadır. Bu veri, Ankara baraj sisteminin mevcut stok durumunu göstermek için kullanılmıştır.
+
+## 🧭 Veri Hakkında Genel Bilgiler
 
 Barajlara gelen su, çekilen su, dağıtılan su ve mevcut baraj su hacmi metreküp cinsindedir. Yağış verisi ise milimetre cinsindedir. Bu nedenle yağış doğrudan hacim olarak değil, barajlara gelen suyu açıklamaya yardımcı iklimsel bir değişken olarak kullanılmıştır.
 
-Baraj doluluk tahmininde temel formül şu şekildedir:
+Senaryo analizinde kullanılan temel su dengesi mantığı şu şekildedir:
 
-$$Tahmini\ Mevcut\ Su_{t+1} = Güncel\ Mevcut\ Su_t + Net\ Su\ Dengesi_t$$
+$$
+\text{Senaryo Mevcut Su}_{t+1} = \text{Güncel Mevcut Su}_{t} + \text{Net Su Dengesi}_{t}
+$$
 
-$$Net\ Su\ Dengesi_t = Tahmini\ Gelen\ Su_t - Tahmini\ Tüketim_t$$
-$$Tahmini\ Doluluk\ Oranı_t = \frac{Tahmini\ Mevcut\ Su_t}{Toplam\ Baraj\ Kapasitesi} \times 100$$
+$$
+\text{Net Su Dengesi}_{t} = \text{Senaryoya Göre Gelen Su}_{t} - \text{Varsayılan Tüketim}_{t}
+$$
 
+$$
+\text{Senaryo Doluluk Oranı}_{t} =
+\frac{\text{Senaryo Mevcut Su}_{t}}{\text{Toplam Baraj Kapasitesi}} \times 100
+$$
 
+## 💡 Veri Setlerinin Tercih Sebebi
 
-## Tercih Sebebi
+Bu veri setleri Ankara'nın su yönetimini hem arz hem de talep tarafıyla inceleme olanağı sağlamaktadır. Barajlara gelen su miktarı arz tarafını, arıtılan ve dağıtılan su miktarı talep tarafını, yağış verisi ise iklimsel arka planı temsil etmektedir. Güncel baraj doluluk verisi ise mevcut stok durumunu görmek ve senaryo analizinde başlangıç düzeyini belirlemek için kullanılmıştır.
 
-Bu veri setleri Ankara'nın su yönetimini hem arz hem de talep tarafıyla inceleme olanağı sağlamaktadır. Barajlara gelen su miktarı arz tarafını, arıtılan ve dağıtılan su miktarı talep tarafını, yağış verisi ise iklimsel arka planı temsil etmektedir. Güncel baraj doluluk verisi ise net su dengesini doğrudan doluluk oranı tahminine dönüştürmek için kullanılmıştır.
+# ⚙️ Ön İşleme
 
-# Ön İşleme
+Veriler Excel formatında `data/` klasöründen R ortamına aktarılmıştır. Aylık baraj verisinde yıl ve ay sütunları düzenlenmiş, geniş formattaki ay sütunları uzun formata dönüştürülmüştür. Sayısal değerlerde nokta, virgül ve boşluk kaynaklı biçim farklılıkları temizlenerek metreküp değerleri sayısal formata çevrilmiştir.
+
+Yağış verisi günlük veya saatlik yapıdan aylık toplam yağış verisine dönüştürülmüştür. Böylece yağış verisi ile barajlara gelen su verisi aynı aylık zaman ölçeğinde karşılaştırılabilir hale getirilmiştir.
+
+Su kullanım ve kaynak verilerinde gereksiz başlık satırları atlanmış, yıl ve miktar değişkenleri sayısal formata çevrilmiştir. Tüm analizlerde karşılaştırmayı kolaylaştırmak için büyük hacim değerleri milyon metreküp cinsinden gösterilmiştir.
 
 ```{r setup}
 library(tidyverse)
@@ -100,39 +126,67 @@ library(rvest)
 library(stringr)
 ```
 
-## Yardımcı Fonksiyonlar
+## 🛠️ Yardımcı Fonksiyonlar
 
 ```{r yardimci-fonksiyonlar}
 bul_dosya <- function(adaylar) {
-  olasi_yollar <- unlist(
-    map(adaylar, ~ c(file.path("data", .x), .x))
+  # Bu fonksiyon dosyayı yalnızca tek klasörde değil,
+  # proje klasörü, QMD dosyasının klasörü ve üst klasörlerde arar.
+  # Böylece Quarto başka yerden çalışsa bile data/ klasörünü bulma şansı artar.
+
+  qmd_dizin <- tryCatch(
+    dirname(normalizePath(knitr::current_input(), winslash = "/", mustWork = FALSE)),
+    error = function(e) NA_character_
   )
+
+  baslangic_dizinleri <- unique(na.omit(c(
+    normalizePath(getwd(), winslash = "/", mustWork = FALSE),
+    qmd_dizin
+  )))
+
+  # Başlangıç klasörleri + 5 seviye üst klasör
+  kokler <- unique(unlist(lapply(baslangic_dizinleri, function(d) {
+    d <- normalizePath(d, winslash = "/", mustWork = FALSE)
+    ustler <- d
+    for (i in 1:5) {
+      yeni <- dirname(tail(ustler, 1))
+      if (identical(yeni, tail(ustler, 1))) break
+      ustler <- c(ustler, yeni)
+    }
+    ustler
+  })))
+
+  olasi_yollar <- unique(unlist(lapply(kokler, function(kok) {
+    unlist(lapply(adaylar, function(ad) {
+      c(
+        file.path(kok, "data", ad),
+        file.path(kok, ad)
+      )
+    }))
+  })))
+
   bulunan <- olasi_yollar[file.exists(olasi_yollar)]
-  
+
   if (length(bulunan) == 0) {
     stop(
       paste0(
         "Dosya bulunamadı. Aranan adaylar: ",
         paste(adaylar, collapse = ", "),
-        "\nDosyayı proje klasörüne veya data/ klasörüne koyunuz."
+        "\nÇalışma klasörü: ", getwd(),
+        "\nQMD klasörü: ", qmd_dizin,
+        "\nKontrol: data/ klasörü render edilen dosyayla aynı proje klasöründe olmalı."
       )
     )
   }
-  
-  bulunan[1]
+
+  normalizePath(bulunan[1], winslash = "/", mustWork = TRUE)
 }
 
 bul_dosya_opsiyonel <- function(adaylar) {
-  olasi_yollar <- unlist(
-    map(adaylar, ~ c(file.path("data", .x), .x))
+  tryCatch(
+    bul_dosya(adaylar),
+    error = function(e) NA_character_
   )
-  bulunan <- olasi_yollar[file.exists(olasi_yollar)]
-  
-  if (length(bulunan) == 0) {
-    return(NA_character_)
-  }
-  
-  bulunan[1]
 }
 
 hacim_sayi <- function(x) {
@@ -181,19 +235,12 @@ ay_tablosu <- tibble(
 )
 ```
 
-# Veri Okuma ve Düzenleme
+# 📥 Veri Okuma ve Düzenleme
 
-## Aylık Barajlara Gelen Su Miktarı
+## 💧 Aylık Barajlara Gelen Su Miktarı
 
 ```{r baraj-verisi}
-baraj_dosya <- bul_dosya(
-  c(
-    "baraj_su.xlsx",
-    "Aylik_Baraj_Su_Miktari.xlsx",
-    "Aylık_Baraj_Su_Miktari.xlsx",
-    "Aylik Baraj Su Miktari.xlsx"
-  )
-)
+baraj_dosya <- bul_dosya(c("baraj_su.xlsx"))
 
 baraj_sayfalar <- excel_sheets(baraj_dosya)
 
@@ -251,17 +298,10 @@ baraj_long |>
   kable_styling(full_width = FALSE)
 ```
 
-## Ankara Yağış Verisi
+## 🌧️ Ankara Yağış Verisi
 
 ```{r yagis-verisi}
-yagis_dosya <- bul_dosya(
-  c(
-    "yagis.xlsx",
-    "Ankara Yağış Verileri (2023-2026).xlsx",
-    "Ankara Yağış Verileri (2023-2026)(1).xlsx",
-    "Ankara Yagis Verileri (2023-2026).xlsx"
-  )
-)
+yagis_dosya <- bul_dosya(c("yagis.xlsx"))
 
 yagis_raw <- read_excel(yagis_dosya)
 
@@ -320,18 +360,10 @@ yagis_aylik |>
   kable_styling(full_width = FALSE)
 ```
 
-## Dağıtılan, Çekilen ve Kişi Başı Çekilen Su Verisi
+## 🚰 Dağıtılan, Çekilen ve Kişi Başı Çekilen Su Verisi
 
 ```{r kullanim-verisi}
-kullanim_dosya <- bul_dosya_opsiyonel(
-  c(
-    "dagitilan_cekilen.xls",
-    "dagitilan_cekilen.xlsx",
-    "DAGITILAN CEKILEN VE KIS BASI CEKILEN.xls",
-    "DAGITILAN CEKILEN VE KIS BASI CEKILEN.xlsx",
-    "DAGITILAN CEKILEN VE KISI BASI CEKILEN.xls"
-  )
-)
+kullanim_dosya <- bul_dosya_opsiyonel(c("dagitilan_cekilen.xlsx"))
 
 if (!is.na(kullanim_dosya)) {
   raw_kullanim <- read_excel(kullanim_dosya, col_names = FALSE)
@@ -367,17 +399,10 @@ if (nrow(su_kullanim) > 0) {
 }
 ```
 
-## Suyun Kaynaklara Göre Dağılımı
+## 🗺️ Suyun Kaynaklara Göre Dağılımı
 
 ```{r kaynak-verisi}
-kaynak_dosya <- bul_dosya_opsiyonel(
-  c(
-    "sular_nereden_geliyor.xls",
-    "sular_nereden_geliyor.xlsx",
-    "sular nereden geliyor.xls",
-    "sular nereden geliyor.xlsx"
-  )
-)
+kaynak_dosya <- bul_dosya_opsiyonel(c("sular_nereden_geliyor.xlsx"))
 
 if (!is.na(kaynak_dosya)) {
   raw_kaynak <- read_excel(kaynak_dosya, col_names = FALSE)
@@ -424,108 +449,37 @@ if (nrow(su_kaynak_long) > 0) {
 }
 ```
 
-## ASKİ Güncel Baraj Doluluk Verisi
+## 📡 ASKİ Güncel Baraj Doluluk Verisi
+
+Otomatik web çekiminde ASKİ tablosu zaman zaman eksik baraj satırı döndürebildiği için bu çalışmada güncel başlangıç stoku manuel tam baraj tablosu üzerinden tanımlanmıştır. Böylece Ankara'nın toplam baraj sistemi ile 2026 tüketim tahmini aynı ölçekte karşılaştırılmıştır.
 
 ```{r aski-guncel-veri}
-aski_url <- "https://www.aski.gov.tr/tr/baraj.aspx"
-
-aski_veri_cek <- function(url) {
-  sayfa <- read_html(url, encoding = "UTF-8")
-  tablolar <- html_table(sayfa, fill = TRUE)
-  
-  uygun_index <- which(
-    map_lgl(
-      tablolar,
-      ~ any(str_detect(names(.x), "Baraj|Hacim|Yüzde|Miktar")) && ncol(.x) >= 4
-    )
-  )
-  
-  if (length(uygun_index) == 0) {
-    uygun_index <- which(
-      map_lgl(
-        tablolar,
-        ~ any(str_detect(as.character(.x[1, ]), "Baraj|Hacim|Yüzde|Miktar")) && ncol(.x) >= 4
-      )
-    )
-  }
-  
-  if (length(uygun_index) == 0) {
-    stop("ASKİ sayfasında baraj tablosu bulunamadı.")
-  }
-  
-  tablo <- tablolar[[uygun_index[1]]]
-  
-  if (!any(str_detect(names(tablo), "Baraj|Hacim|Yüzde|Miktar"))) {
-    names(tablo) <- as.character(tablo[1, ])
-    tablo <- tablo[-1, ]
-  }
-  
-  names(tablo) <- names(tablo) |>
-    str_squish()
-  
-  baraj_col <- names(tablo)[str_detect(names(tablo), "Baraj")][1]
-  hacim_col <- names(tablo)[str_detect(names(tablo), "Toplam|Hacim")][1]
-  su_col <- names(tablo)[str_detect(names(tablo), "SU Miktarı|Su Miktarı|Miktarı")][1]
-  yuzde_col <- names(tablo)[str_detect(names(tablo), "Yüzde|Yuzde|%")][1]
-  
-  if (any(is.na(c(baraj_col, hacim_col, su_col, yuzde_col)))) {
-    stop("ASKİ baraj tablosunda gerekli sütunlar bulunamadı.")
-  }
-  
-  tablo |>
-    transmute(
-      baraj_adi = as.character(.data[[baraj_col]]),
-      toplam_hacim_m3 = hacim_sayi(.data[[hacim_col]]),
-      mevcut_su_m3 = hacim_sayi(.data[[su_col]]),
-      doluluk_yuzde = yuzde_sayi(.data[[yuzde_col]])
-    ) |>
-    filter(
-      !is.na(baraj_adi),
-      !is.na(toplam_hacim_m3),
-      !is.na(mevcut_su_m3)
-    )
-}
-
-baraj_detay <- tryCatch(
-  {
-    gelen_veri <- aski_veri_cek(aski_url) |>
-      mutate(veri_kaynagi = "ASKİ web sayfası")
-
-    if (nrow(gelen_veri) < 10) {
-      stop("ASKİ verisi eksik geldi, manuel tablo kullanılacak.")
-    }
-
-    gelen_veri
-  },
-  error = function(e) {
-    tibble(
-      baraj_adi = c(
-        "Akyar Barajı",
-        "Çamlıdere Barajı",
-        "Çubuk 2 Barajı",
-        "Eğrekkaya Barajı",
-        "Kargalı Barajı",
-        "Kavşakkaya Barajı",
-        "Kesikköprü Barajı",
-        "Kurtboğazı Barajı",
-        "Peçenek Barajı",
-        "Türkşerefli Barajı"
-      ),
-      toplam_hacim_m3 = c(
-        52445000, 1108276000, 22961000, 93452000, 542000,
-        85228000, 95000000, 91762000, 59525000, 5668500
-      ),
-      mevcut_su_m3 = c(
-        42436000, 442928000, 16339000, 74979000, 542000,
-        58130000, 95000000, 29670000, 16360000, 295000
-      ),
-      doluluk_yuzde = c(
-        80.92, 39.97, 71.16, 80.23, 100.00,
-        68.21, 100.00, 32.33, 27.48, 5.20
-      ),
-      veri_kaynagi = "Manuel yedek tablo"
-    )
-  }
+baraj_detay <- tibble(
+  baraj_adi = c(
+    "Akyar Barajı",
+    "Çamlıdere Barajı",
+    "Çubuk 2 Barajı",
+    "Eğrekkaya Barajı",
+    "Kargalı Barajı",
+    "Kavşakkaya Barajı",
+    "Kesikköprü Barajı",
+    "Kurtboğazı Barajı",
+    "Peçenek Barajı",
+    "Türkşerefli Barajı"
+  ),
+  toplam_hacim_m3 = c(
+    52445000, 1108276000, 22961000, 93452000, 542000,
+    85228000, 95000000, 91762000, 59525000, 5668500
+  ),
+  mevcut_su_m3 = c(
+    42436000, 442928000, 16339000, 74979000, 542000,
+    58130000, 95000000, 29670000, 16360000, 295000
+  ),
+  doluluk_yuzde = c(
+    80.92, 39.97, 71.16, 80.23, 100.00,
+    68.21, 100.00, 32.33, 27.48, 5.20
+  ),
+  veri_kaynagi = "Manuel tam ASKİ baraj tablosu"
 )
 
 baraj_guncel_ozet <- baraj_detay |>
@@ -557,7 +511,7 @@ guncel_mevcut_su_m3 <- baraj_guncel_ozet$guncel_mevcut_su_m3[1]
 guncel_doluluk_yuzde <- baraj_guncel_ozet$guncel_doluluk_yuzde[1]
 ```
 
-## Arıtılan İçme ve Kullanma Suyu Miktarı
+## 🧪 Arıtılan İçme ve Kullanma Suyu Miktarı
 
 2023 ve 2024 değerleri gerçekleşme, 2025 ve 2026 değerleri hedef/tahmin niteliğinde kullanılmıştır.
 
@@ -593,11 +547,26 @@ aritilan_su_yillik |>
 
 ```
 
-# Analiz
+# 🔍 Analiz
 
-## Keşifsel Veri Analizi
+## 📊 Keşifsel Veri Analizi Yaklaşımı
 
-### Aylara Göre Barajlara Gelen Su
+Bu çalışmada keşifsel veri analizi (EDA), Ankara'nın su sistemini oluşturan temel değişkenleri tanımak, değişkenlerin zaman içindeki davranışını görmek ve değişkenler arasındaki olası ilişkileri yorumlamak amacıyla yapılmıştır. EDA aşaması yalnızca grafik üretmek için değil; arz, talep ve mevcut stok dinamiklerini birlikte okuyabilmek için kullanılmıştır.
+
+Keşifsel veri analizi kapsamında aşağıdaki grafik ve analiz türleri kullanılmıştır:
+
+- **Aylara Göre Barajlara Gelen Su:** Aylık dağılımı ve uç değerleri görmek için **box plot** oluşturulmuştur. Bu grafik, her ayın yıllar içindeki değişkenliğini ve mevsimsel yapıyı değerlendirmek için kullanılmıştır.
+- **Aylara Göre Ortalama Baraj Su Girişi:** Aylar arası ortalama su girişi düzeylerini karşılaştırmak için **sütun grafiği** oluşturulmuştur. Bu grafik, hangi aylarda su girişinin daha yüksek veya düşük olduğunu daha net göstermektedir.
+- **Yıllara Göre Barajlara Gelen Toplam Su Miktarı:** Uzun dönemli dalgalanmayı ve yıllar arası değişimi görmek için **çizgi grafiği** oluşturulmuştur.
+- **Ay ve Yıllara Göre Barajlara Gelen Su Miktarı:** Yıl-ay kırılımında yüksek ve düşük su giriş dönemlerini aynı anda görebilmek için **heatmap grafiği** kullanılmıştır.
+- **Yağış ve Barajlara Gelen Su İlişkisi:** İki sayısal değişken arasındaki ilişkiyi görmek için saçılım grafiği, korelasyon ve doğrusal regresyon analizi kullanılmıştır. Böylece yağışın barajlara gelen suyu ne ölçüde açıklayabildiği değerlendirilmiştir.
+- **Kaynak Kompozisyonu:** Ankara'nın su arzında barajların ne kadar stratejik bir paya sahip olduğu kaynaklara göre dağılım grafikleriyle ortaya konulmuştur.
+
+Bu analizler sonucunda barajlara gelen su miktarında belirgin bir mevsimsel yapı olduğu, yıllık toplam su girişinin yıldan yıla ciddi dalgalanmalar gösterdiği, yağış ile barajlara gelen su arasında pozitif fakat sınırlı bir ilişki bulunduğu ve Ankara'nın su arzında barajların merkezi bir rol oynadığı görülmüştür. Bu nedenle su yönetimi yalnızca yağış miktarıyla değil; tüketim eğilimleri, kaynak çeşitliliği, mevcut baraj stoku ve mevsimsel planlama ile birlikte değerlendirilmelidir.
+
+## 🔎 Keşifsel Veri Analizi
+
+### 🗓️ Aylara Göre Barajlara Gelen Su
 
 ```{r baraj-aylik-boxplot}
 ggplot(baraj_long, aes(x = ay, y = gelen_su_milyon_m3)) +
@@ -633,7 +602,7 @@ baraj_long |>
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-### Yıllara Göre Toplam Gelen Su
+### 📅 Yıllara Göre Toplam Gelen Su
 
 ```{r baraj-yillik-trend}
 baraj_yillik <- baraj_long |>
@@ -687,7 +656,7 @@ ggplot(baraj_long, aes(x = ay, y = factor(yil), fill = gelen_su_milyon_m3)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-## Yağış ve Barajlara Gelen Su İlişkisi
+## 🌧️ Yağış ve Barajlara Gelen Su İlişkisi
 
 ```{r yagis-baraj-birlesim}
 yagis_baraj <- baraj_long |>
@@ -733,7 +702,7 @@ tibble(
 
 Yağış ve barajlara gelen su arasında pozitif bir ilişki beklenmektedir. Ancak bu ilişkinin birebir olması beklenmez. Çünkü yağışın baraja ulaşması havza özelliklerine, kar erimesine, buharlaşmaya, toprak nemine ve yüzey akışına bağlıdır.
 
-## Su Kullanımı Analizi
+## 🚰 Su Kullanımı Analizi
 
 ```{r su-kullanim-grafikleri}
 if (nrow(su_kullanim) > 0) {
@@ -784,7 +753,7 @@ if (nrow(su_kullanim) > 0) {
 
 Dağıtılan ve çekilen su miktarının yıllar içinde artması, Ankara'nın su talebinin uzun vadede yükseldiğini göstermektedir. Kişi başı günlük su değerinin dalgalı olması ise toplam talepteki artışın yalnızca bireysel tüketimden değil, nüfus artışı, kentleşme ve altyapı dinamiklerinden de etkilendiğini düşündürmektedir.
 
-## Su Kaynakları Analizi
+## 🌊 Su Kaynakları Analizi
 
 ```{r kaynak-kompozisyonu}
 if (nrow(su_kaynak_long) > 0) {
@@ -824,9 +793,9 @@ if (nrow(su_kaynak_long) > 0) {
 
 Kaynak kompozisyonu Ankara'nın su arzında barajların stratejik önemini göstermektedir. Baraj kaynaklı suyun baskın hale gelmesi, yağış rejimi ve baraj doluluklarının su yönetimi açısından daha kritik hale gelmesine neden olmaktadır.
 
-# Model Uydurma
+# İstatistiksel İlişki ve Trend Analizleri
 
-## Yağış ve Gelen Su Modeli
+## 📉 Yağış ve Gelen Su Modeli
 
 ```{r yagis-modeli}
 model_yagis <- lm(gelen_su_milyon_m3 ~ aylik_yagis_mm, data = yagis_baraj)
@@ -843,7 +812,35 @@ glance(model_yagis) |>
 
 Bu model yağış miktarı ile barajlara gelen su miktarı arasındaki doğrusal ilişkiyi incelemek için kurulmuştur. Model nedensellik kanıtı olarak değil, keşifsel ilişki analizi olarak değerlendirilmelidir.
 
-## Dağıtılan Su Trend Modeli
+## ⏱️ Gecikmeli Yağış Modeli
+
+Yağışın barajlara gelen suya etkisi aynı ay içinde tamamen ortaya çıkmayabilir. Havza gecikmesi, kar erimesi, toprak nemi ve yüzey akışı nedeniyle bir önceki ayın yağışı da barajlara gelen su miktarıyla ilişkili olabilir. Bu nedenle modele bir aylık gecikmeli yağış değişkeni eklenmiştir.
+
+```{r yagis-modeli-gecikmeli}
+yagis_baraj_lag <- yagis_baraj |>
+  arrange(tarih) |>
+  mutate(
+    yagis_lag1 = lag(aylik_yagis_mm)
+  )
+
+model_yagis_lag <- lm(
+  gelen_su_milyon_m3 ~ aylik_yagis_mm + yagis_lag1,
+  data = yagis_baraj_lag
+)
+
+tidy(model_yagis_lag) |>
+  kable(digits = 4, caption = "Gecikmeli yağış modeli katsayıları") |>
+  kable_styling(full_width = FALSE)
+
+glance(model_yagis_lag) |>
+  select(r.squared, adj.r.squared, sigma, statistic, p.value) |>
+  kable(digits = 4, caption = "Gecikmeli yağış modeli uyum ölçütleri") |>
+  kable_styling(full_width = FALSE)
+```
+
+Gecikmeli model, yağış-baraj ilişkisini yalnızca aynı ay yağışına indirgememek için eklenmiştir. Model sonuçları, aynı ay yağışı ile bir önceki ay yağışının birlikte değerlendirilmesinin açıklayıcılığı artırıp artırmadığını göstermektedir.
+
+## 📈 Dağıtılan Su Trend Modeli
 
 ```{r dagitilan-trend-model}
 if (nrow(su_kullanim) > 0) {
@@ -874,142 +871,199 @@ if (nrow(su_kullanim) > 0) {
 }
 ```
 
-# 2026 Kalan Aylar İçin Baraj Doluluk Oranı Tahmini
+# 🔮 2026 Haziran-Aralık ve 2027 Ocak-Aralık İçin Senaryo Analizi
 
-Bu bölümde güncel baraj mevcut su hacmi başlangıç noktası olarak alınmıştır. 2026 yılının kalan ayları için barajlara gelecek su miktarı, 2001-2025 dönemindeki aynı ayların ortalaması ile tahmin edilmiştir. Tüketim tarafında ise 2026 yılı arıtılan su hedefi ay gün sayısına göre aylara dağıtılmıştır.
+Bu bölümde teknik anlamda bir zaman serisi tahmin modeli kurulmamıştır. Amaç, farklı su girişi koşulları altında Ankara baraj sistemindeki mevcut su stokunun nasıl değişebileceğini keşifsel olarak incelemektir. Bu nedenle analiz, kurak, normal ve iyimser olmak üzere üç senaryo üzerinden yürütülmüştür.
 
-Tahmin denklemi:
+Senaryo analizi 2026 Haziran-Aralık dönemi ile 2027 Ocak-Aralık dönemini kapsamaktadır. 2026 yılı için Ocak-Mayıs döneminin gerçekleştiği kabul edilmiş, Haziran-Aralık ayları ve 2027 yılının tamamı senaryo kapsamında değerlendirilmiştir. Barajlara gelecek su miktarı için geçmiş yılların aynı ay ortalamaları referans alınmış, tüketim tarafında ise 2026 yılı arıtılan su hedefi ve 2027 yılı için basit doğrusal trend varsayımı kullanılmıştır.
 
-\[
-Net\ Su\ Dengesi = Beklenen\ Barajlara\ Gelen\ Su - Tahmini\ Tüketim
-\]
+Bu bölümde kullanılan 2027 tüketim değeri kesin bir tahmin modeli sonucu olarak değil, senaryo analizinde tüketim tarafını tamamlamak için üretilmiş basit bir trend varsayımı olarak değerlendirilmelidir. Sonuçlar kesin hidrolojik tahmin değil, karar destek amaçlı risk aralığıdır.
 
-\[
-Tahmini\ Mevcut\ Su = Güncel\ Mevcut\ Su + Kümülatif\ Net\ Su\ Dengesi
-\]
+Senaryo varsayımları şu şekildedir:
 
-\[
-Tahmini\ Doluluk\ Oranı = \frac{Tahmini\ Mevcut\ Su}{Toplam\ Baraj\ Kapasitesi} \times 100
-\]
+- **Kurak senaryo:** Geçmiş ay ortalamasının %70'i kadar su girişi
+- **Normal senaryo:** Geçmiş ay ortalaması kadar su girişi
+- **İyimser senaryo:** Geçmiş ay ortalamasının %130'u kadar su girişi
 
-# 2026 Kalan Aylar İçin Baraj Doluluk Oranı Tahmini
+Bu yaklaşımda SARIMA, ARIMA veya Holt-Winters gibi ileri zaman serisi tahmin modelleri kurulmamıştır. Çünkü çalışmanın temel amacı geleceğe yönelik en düşük hatalı tahmin modelini seçmek değil, Ankara su sistemini arz, talep ve mevcut stok dengesi üzerinden yorumlanabilir biçimde incelemektir.
 
-Bu bölümde güncel baraj mevcut su hacmi başlangıç noktası olarak alınmıştır. 2026 yılının kalan ayları için barajlara gelecek su miktarı, 2001-2025 dönemindeki aynı ayların ortalaması ile tahmin edilmiştir. Tüketim tarafında ise 2026 yılı arıtılan su hedefi ay gün sayısına göre aylara dağıtılmıştır.
+Senaryo analizinde kullanılan hesaplama mantığı şu şekildedir:
 
-Bu analizde 2026 yılı için Ocak-Mayıs döneminin gerçekleştiği kabul edilmiş, Haziran-Aralık dönemi için tahmin yapılmıştır.
+$$
+	ext{Net Su Dengesi}_{t,s} = 	ext{Beklenen Gelen Su}_{t} 	imes 	ext{Senaryo Çarpanı}_{s} - 	ext{Varsayılan Tüketim}_{t}
+$$
 
-Tahmin denklemi:
+$$
+	ext{Senaryo Mevcut Su}_{t,s} = 	ext{Güncel Mevcut Su} + \sum_{i=1}^{t} 	ext{Net Su Dengesi}_{i,s}
+$$
 
-\[
-Net\ Su\ Dengesi = Beklenen\ Barajlara\ Gelen\ Su - Tahmini\ Tüketim
-\]
-
-\[
-Tahmini\ Mevcut\ Su = Güncel\ Mevcut\ Su + Kümülatif\ Net\ Su\ Dengesi
-\]
-
-\[
-Tahmini\ Doluluk\ Oranı = \frac{Tahmini\ Mevcut\ Su}{Toplam\ Baraj\ Kapasitesi} \times 100
-\]
+$$
+	ext{Senaryo Doluluk Oranı}_{t,s} =
+ 
+rac{	ext{Senaryo Mevcut Su}_{t,s}}{	ext{Toplam Baraj Kapasitesi}} 	imes 100
+$$
 
 ```{r doluluk-tahmin-hazirlik}
-tahmin_yili <- 2026
+baslangic_yili <- 2026
+son_tahmin_yili <- 2027
 
-# 2026 için gerçekten gerçekleşmiş kabul edilen son ay:
-# Mayıs = 5
+# 2026 için gerçekleşmiş kabul edilen son ay: Mayıs = 5
 son_gercek_ay <- 5L
 
-# Tahmin edilecek aylar: Haziran-Aralık
-tahmin_edilecek_aylar <- ay_tablosu |>
-  select(ay_no, ay) |>
-  filter(ay_no > son_gercek_ay)
+# 2026 Haziran-Aralık + 2027 Ocak-Aralık senaryo ayları
+tahmin_aylari_takvim <- expand_grid(
+  yil = baslangic_yili:son_tahmin_yili,
+  ay_no = 1:12
+) |>
+  filter(
+    (yil == baslangic_yili & ay_no > son_gercek_ay) |
+      (yil > baslangic_yili)
+  ) |>
+  left_join(ay_tablosu |> select(ay_no, ay), by = "ay_no") |>
+  arrange(yil, ay_no)
 
-# 2001-2025 döneminde ay bazlı ortalama gelen su
+# Bu bölüm bir tahmin modeli değildir.
+# Senaryo analizinde kullanılacak aylık referans su girişlerini üretir.
+# Her ay için geçmiş yıllardaki aynı ay ortalaması alınır.
+# Örneğin Ocak için geçmiş Ocak ayları, Haziran için geçmiş Haziran ayları dikkate alınır.
 aylik_mevsimsel_ortalama <- baraj_long |>
-  filter(yil >= 2001, yil <= tahmin_yili - 1) |>
+  filter(yil >= 2001, yil <= 2025) |>
   group_by(ay_no) |>
   summarise(
-    tahmini_gelen_su_m3 = mean(gelen_su_m3, na.rm = TRUE),
-    tahmini_gelen_su_milyon_m3 = tahmini_gelen_su_m3 / 1e6,
+    beklenen_gelen_su_m3 = mean(gelen_su_m3, na.rm = TRUE),
+    beklenen_gelen_su_milyon_m3 = beklenen_gelen_su_m3 / 1e6,
     .groups = "drop"
   )
 
-# 2026 arıtılan su hedefi
-aritilan_2026_m3 <- aritilan_su_yillik |>
-  filter(yil == tahmin_yili) |>
-  pull(aritilan_su_m3)
+# 2027 arıtılan su değeri:
+# 2023-2026 dönemindeki arıtılan su değerleri kullanılarak basit doğrusal trend varsayımı üretilir.
+model_aritilan <- lm(aritilan_su_m3 ~ yil, data = aritilan_su_yillik)
 
-if (length(aritilan_2026_m3) == 0) {
-  stop("2026 arıtılan su hedef değeri bulunamadı.")
-}
+aritilan_2027 <- tibble(
+  yil = 2027,
+  aritilan_su_m3 = as.numeric(predict(model_aritilan, newdata = tibble(yil = 2027))),
+  veri_turu = "Trend Varsayımı"
+)
 
-# 2026 tüketim hedefini ay gün sayısına göre aylara dağıtma
-tuketim_aylik_2026 <- tibble(
-  ay_no = 1:12,
-  gun_sayisi = days_in_month(as.Date(paste(tahmin_yili, 1:12, "01", sep = "-"))) |> as.integer()
+aritilan_su_senaryo <- aritilan_su_yillik |>
+  select(yil, aritilan_su_m3, veri_turu) |>
+  bind_rows(aritilan_2027)
+
+aritilan_su_senaryo |>
+  filter(yil %in% baslangic_yili:son_tahmin_yili) |>
+  mutate(aritilan_su_milyon_m3 = aritilan_su_m3 / 1e6) |>
+  kable(
+    digits = 2,
+    caption = "Senaryo analizinde kullanılan 2026 ve 2027 arıtılan su değerleri"
+  ) |>
+  kable_styling(full_width = FALSE)
+
+# 2026 ve 2027 tüketimini ay gün sayısına göre aylara dağıtma
+tuketim_aylik <- expand_grid(
+  yil = baslangic_yili:son_tahmin_yili,
+  ay_no = 1:12
 ) |>
   mutate(
-    yil = tahmin_yili,
-    tahmini_tuketim_m3 = aritilan_2026_m3 * gun_sayisi / sum(gun_sayisi),
-    tahmini_tuketim_milyon_m3 = tahmini_tuketim_m3 / 1e6
-  )
-
-# Haziran-Aralık için tahmin tablosu
-tahmin_aylari <- tahmin_edilecek_aylar |>
-  mutate(yil = tahmin_yili) |>
-  left_join(
-    aylik_mevsimsel_ortalama,
-    by = "ay_no"
+    gun_sayisi = days_in_month(as.Date(paste(yil, ay_no, "01", sep = "-"))) |> as.integer()
   ) |>
-  left_join(
-    tuketim_aylik_2026 |>
-      select(ay_no, tahmini_tuketim_m3, tahmini_tuketim_milyon_m3),
-    by = "ay_no"
-  ) |>
-  arrange(ay_no) |>
+  left_join(aritilan_su_senaryo, by = "yil") |>
+  group_by(yil) |>
   mutate(
+    tahmini_tuketim_m3 = aritilan_su_m3 * gun_sayisi / sum(gun_sayisi),
+    tahmini_tuketim_milyon_m3 = tahmini_tuketim_m3 / 1e6
+  ) |>
+  ungroup()
+
+senaryolar <- tibble(
+  senaryo = factor(
+    c("Kurak", "Normal", "İyimser"),
+    levels = c("Kurak", "Normal", "İyimser")
+  ),
+  gelen_su_carpani = c(0.70, 1.00, 1.30)
+)
+
+# 2026 Haziran-Aralık + 2027 Ocak-Aralık için üç senaryolu su dengesi tablosu
+tahmin_aylari <- crossing(
+  tahmin_aylari_takvim,
+  senaryolar
+) |>
+  left_join(aylik_mevsimsel_ortalama, by = "ay_no") |>
+  left_join(
+    tuketim_aylik |>
+      select(yil, ay_no, tahmini_tuketim_m3, tahmini_tuketim_milyon_m3),
+    by = c("yil", "ay_no")
+  ) |>
+  arrange(senaryo, yil, ay_no) |>
+  group_by(senaryo) |>
+  mutate(
+    tahmini_gelen_su_m3 = beklenen_gelen_su_m3 * gelen_su_carpani,
+    tahmini_gelen_su_milyon_m3 = tahmini_gelen_su_m3 / 1e6,
     net_su_dengesi_m3 = tahmini_gelen_su_m3 - tahmini_tuketim_m3,
     net_su_dengesi_milyon_m3 = net_su_dengesi_m3 / 1e6,
     kumulatif_net_su_dengesi_m3 = cumsum(replace_na(net_su_dengesi_m3, 0)),
     kumulatif_net_su_dengesi_milyon_m3 = kumulatif_net_su_dengesi_m3 / 1e6,
-    tahmini_mevcut_su_m3 = guncel_mevcut_su_m3 + kumulatif_net_su_dengesi_m3,
-    tahmini_mevcut_su_m3 = pmax(tahmini_mevcut_su_m3, 0),
-    tahmini_doluluk_yuzde = tahmini_mevcut_su_m3 / toplam_kapasite_m3 * 100
-  )
+    senaryo_mevcut_su_m3 = guncel_mevcut_su_m3 + kumulatif_net_su_dengesi_m3,
+    senaryo_mevcut_su_m3 = pmin(pmax(senaryo_mevcut_su_m3, 0), toplam_kapasite_m3),
+    senaryo_mevcut_su_milyon_m3 = senaryo_mevcut_su_m3 / 1e6,
+    senaryo_doluluk_yuzde = senaryo_mevcut_su_m3 / toplam_kapasite_m3 * 100,
+    dönem = paste(yil, ay, sep = " ")
+  ) |>
+  ungroup()
 
 tahmin_aylari |>
   select(
+    yil,
+    ay,
+    senaryo,
+    tahmini_gelen_su_milyon_m3,
+    tahmini_tuketim_milyon_m3,
+    net_su_dengesi_milyon_m3,
+    senaryo_mevcut_su_milyon_m3,
+    senaryo_doluluk_yuzde
+  ) |>
+  kable(
+    digits = 2,
+    caption = "2026 Haziran-Aralık ve 2027 Ocak-Aralık için senaryolu su dengesi hesabı"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+```{r normal-senaryo-tablosu}
+tahmin_aylari |>
+  filter(senaryo == "Normal") |>
+  select(
+    yil,
     ay,
     tahmini_gelen_su_milyon_m3,
     tahmini_tuketim_milyon_m3,
     net_su_dengesi_milyon_m3,
-    kumulatif_net_su_dengesi_milyon_m3,
-    tahmini_mevcut_su_m3,
-    tahmini_doluluk_yuzde
+    senaryo_mevcut_su_milyon_m3,
+    senaryo_doluluk_yuzde
   ) |>
   kable(
     digits = 2,
-    caption = "2026 Haziran-Aralık dönemi için tahmini su dengesi ve doluluk oranı"
+    caption = "Normal senaryoda 2026 Haziran-Aralık ve 2027 Ocak-Aralık su dengesi hesabı"
   ) |>
   kable_styling(full_width = FALSE)
 ```
 
 ```{r net-su-dengesi-grafik}
-ggplot(tahmin_aylari, aes(x = ay, y = net_su_dengesi_milyon_m3)) +
-  geom_col() +
+ggplot(tahmin_aylari, aes(x = factor(dönem, levels = unique(dönem)), y = net_su_dengesi_milyon_m3, fill = senaryo)) +
+  geom_col(position = "dodge") +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(
-    title = "2026 Haziran-Aralık İçin Tahmini Aylık Net Su Dengesi",
-    subtitle = "Net denge = tahmini gelen su - tahmini tüketim",
-    x = "Ay",
-    y = "Net Su Dengesi (Milyon m³)"
+    title = "2026 Haziran-Aralık ve 2027 İçin Senaryolu Aylık Net Su Dengesi",
+    subtitle = "Net denge = senaryoya göre gelen su - varsayılan tüketim",
+    x = "Dönem",
+    y = "Net Su Dengesi (Milyon m³)",
+    fill = "Senaryo"
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r doluluk-tahmin-grafik}
-ggplot(tahmin_aylari, aes(x = ay, y = tahmini_doluluk_yuzde, group = 1)) +
+ggplot(tahmin_aylari, aes(x = factor(dönem, levels = unique(dönem)), y = senaryo_doluluk_yuzde, color = senaryo, group = senaryo)) +
   geom_line(linewidth = 1.1) +
   geom_point(size = 2.5) +
   geom_hline(
@@ -1017,76 +1071,75 @@ ggplot(tahmin_aylari, aes(x = ay, y = tahmini_doluluk_yuzde, group = 1)) +
     linetype = "dashed"
   ) +
   labs(
-    title = "2026 Haziran-Aralık İçin Tahmini Baraj Doluluk Oranı",
+    title = "2026 Haziran-Aralık ve 2027 İçin Senaryolu Baraj Doluluk Oranı",
     subtitle = "Kesikli çizgi güncel başlangıç doluluk oranını göstermektedir.",
-    x = "Ay",
-    y = "Tahmini Doluluk Oranı (%)"
+    x = "Dönem",
+    y = "Senaryo Doluluk Oranı (%)",
+    color = "Senaryo"
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r tahmin-sonu-ozet}
-tibble(
-  gosterge = c(
-    "Güncel mevcut su hacmi",
-    "Güncel doluluk oranı",
-    "Tahmin başlangıç ayı",
-    "Tahmin son ayı",
-    "Tahmin sonunda mevcut su hacmi",
-    "Tahmin sonunda doluluk oranı"
-  ),
-  deger = c(
-    paste0(round(guncel_mevcut_su_m3 / 1e6, 2), " milyon m³"),
-    paste0(round(guncel_doluluk_yuzde, 2), " %"),
-    "Haziran 2026",
-    "Aralık 2026",
-    paste0(round(last(tahmin_aylari$tahmini_mevcut_su_m3) / 1e6, 2), " milyon m³"),
-    paste0(round(last(tahmin_aylari$tahmini_doluluk_yuzde), 2), " %")
+senaryo_sonu_ozet <- tahmin_aylari |>
+  group_by(senaryo) |>
+  filter(yil == max(yil), ay_no == max(ay_no[yil == max(yil)])) |>
+  ungroup() |>
+  transmute(
+    senaryo,
+    dönem_sonu = dönem,
+    senaryo_sonu_mevcut_su_milyon_m3 = senaryo_mevcut_su_milyon_m3,
+    senaryo_sonu_doluluk_yuzde = senaryo_doluluk_yuzde
   )
-) |>
-  kable(caption = "Güncel durum ve tahmin sonu özeti") |>
+
+senaryo_sonu_ozet |>
+  kable(
+    digits = 2,
+    caption = "Senaryolara göre 2027 Aralık dönem sonu özeti"
+  ) |>
   kable_styling(full_width = FALSE)
 ```
 
-Bu tahmin, 2026 yılı için Mayıs ayına kadar gerçekleşmiş veri olduğu varsayımıyla Haziran-Aralık dönemini kapsamaktadır. Modelde beklenen aylık su girişi geçmiş yılların aynı ay ortalamalarına, tüketim tarafı ise 2026 arıtılan su hedefinin ay gün sayılarına göre dağıtılmasına dayanmaktadır.
-# Sonuçlar
+Bu senaryo analizi 2026 Haziran-Aralık ve 2027 Ocak-Aralık dönemini kapsamaktadır. Belirsizlik yalnızca barajlara gelen su tarafında senaryolaştırılmıştır. Tüketim tarafında 2026 değeri program/hedef verisinden, 2027 değeri ise basit doğrusal trend varsayımından yararlanılarak aylara dağıtılmıştır. Bu nedenle sonuçlar kesin hidrolojik tahmin değil, karar destek amaçlı senaryo analizi olarak değerlendirilmelidir.
+
+# 📝 Sonuçlar ve Ana Çıkarımlar
 
 Bu çalışmada Ankara'nın su yönetimi, barajlara gelen su miktarı, yağış verisi, su kullanım göstergeleri ve güncel baraj doluluk durumu birlikte ele alınmıştır. Analizler sonucunda aşağıdaki bulgular öne çıkmaktadır:
 
-1. Ankara barajlarına gelen su miktarı belirgin bir mevsimsellik göstermektedir.
+1. Ankara barajlarına gelen su miktarı aylara göre belirgin mevsimsellik göstermektedir.
 2. Yıllık toplam su girişi yıldan yıla ciddi dalgalanmalar göstermektedir.
-3. Yağış ile barajlara gelen su arasında pozitif ilişki beklenmekle birlikte, bu ilişki tek başına yeterli açıklama sağlamaz.
-4. Dağıtılan ve çekilen su miktarları uzun vadede artış eğilimi göstermektedir.
-5. Ankara'nın su arzında barajlar kritik kaynak durumundadır.
-6. Güncel baraj hacmi kullanılarak, tahmini net su dengesi doluluk oranı tahminine dönüştürülebilir.
+3. Yağış ile barajlara gelen su arasında pozitif ilişki vardır; ancak yağış tek başına gelen su miktarındaki değişimi tam olarak açıklamaz.
+4. Aynı ay yağışına ek olarak bir ay gecikmeli yağış değişkeninin incelenmesi, havza gecikmesini dikkate alan daha anlamlı bir modelleme yaklaşımı sunmaktadır.
+5. Dağıtılan ve çekilen su miktarları uzun vadede artış eğilimi göstermektedir.
+6. Ankara'nın su arzında barajlar kritik kaynak durumundadır.
+7. Senaryo analizleri, kurak koşullarda 2026 Haziran-Aralık ve 2027 yılı boyunca stok baskısının belirginleşebileceğini göstermektedir.
 
-# Sonuçlar ve Ana Çıkarımlar
+Ankara'nın su yönetimi açısından en önemli bulgu, kentin baraj kaynaklarına yüksek bağımlılık göstermesidir. Bu durum, yağış rejimindeki değişimlerin ve kurak dönemlerin su yönetimi üzerinde doğrudan etkili olabileceğini göstermektedir. Ancak analiz sonuçları, baraj doluluğunun yalnızca yağışa bağlı olmadığını; tüketim yönetimi, kaynak çeşitliliği ve mevsimsel planlamanın da kritik olduğunu ortaya koymaktadır.
 
-Ankara'nın su yönetimi açısından en önemli bulgu, kentin baraj kaynaklarına yüksek bağımlılık göstermesidir. Bu durum, yağış rejimindeki değişimlerin ve kurak dönemlerin su yönetimi üzerinde doğrudan etkili olabileceğini göstermektedir.
+Üç senaryolu yaklaşım, tek bir kesin değer vermek yerine risk aralığını göstermektedir. Bu nedenle proje, kesin hidrolojik tahmin üretmekten çok, açık veriye dayalı keşifsel analiz ve karar destek çerçevesi sunmaktadır.
 
-Model sonuçları, önümüzdeki aylar için baraj doluluk oranının gelen su ve tüketim dengesiyle yakından ilişkili olduğunu ortaya koymaktadır. Ancak model, buharlaşma, yeraltı sızıntısı, havzalar arası transfer, operasyonel deşarjlar ve baraj bazlı işletme kararlarını içermediği için kesin hidrolojik tahmin olarak değerlendirilmemelidir.
-
-Bu proje karar vericiler açısından şu mesajı vermektedir: Ankara'da baraj doluluk oranı yalnızca yağışla değil, aynı zamanda tüketim yönetimi, kaynak çeşitliliği ve mevsimsel planlama ile birlikte ele alınmalıdır.
-
-# Sınırlılıklar
+# ⚠️ Sınırlılıklar
 
 Bu çalışmanın bazı sınırlılıkları bulunmaktadır:
 
-1. 2026 yılı barajlara gelen su verileri tamamlanmamıştır.
-2. 2025 ve 2026 arıtılan su değerleri gerçekleşme değil, hedef/tahmin niteliğindedir.
-3. ASKİ güncel baraj doluluk verisi, modelde başlangıç stoku olarak kullanılmıştır.
-4. Tahmin modeli basit mevsimsel ortalamaya dayanmaktadır.
-5. Buharlaşma, sızıntı, baraj işletme kararları, havza alanı, kar örtüsü ve yüzey akışı modele dahil edilmemiştir.
-6. Yağış verisi mm cinsindedir; doğrudan hacme çevrilmemiştir.
-7. Tahmin sonuçları kesin sonuç değil, keşifsel karar destek senaryosu olarak yorumlanmalıdır.
+1. 2026 yılı barajlara gelen su verileri tamamlanmamıştır; 2027 dönemi ise tamamen senaryo varsayımlarıyla değerlendirilmiştir.
+2. 2025 ve 2026 arıtılan su değerleri gerçekleşme değil, hedef/tahmin niteliğindedir; 2027 arıtılan su değeri ise basit doğrusal trend varsayımıyla oluşturulmuştur.
+3. Güncel baraj doluluk verisi manuel tam tablo olarak kullanılmıştır; otomatik ASKİ çekimi eksik tablo riski nedeniyle devre dışı bırakılmıştır.
+4. Senaryo analizi geçmiş ay ortalamalarına ve basit su girişi çarpanlarına dayanmaktadır; teknik anlamda ARIMA, SARIMA veya Holt-Winters gibi bir zaman serisi tahmin modeli kurulmamıştır.
+5. Buharlaşma, sızıntı, baraj işletme kararları, havzalar arası transfer, kar örtüsü ve yüzey akışı modele doğrudan dahil edilmemiştir.
+6. Yağış verisi milimetre cinsindedir; doğrudan hacme çevrilmemiştir.
+7. Senaryo sonuçları kesin sonuç değil, karar destek amaçlı risk aralığı olarak yorumlanmalıdır.
+8. Gelecek çalışmalarda, veri seti tamamlandığında SARIMA, Holt-Winters veya ETS gibi mevsimsel zaman serisi modelleri denenerek bu çalışmadaki senaryo yaklaşımıyla karşılaştırılabilir.
 
-# Yapay Zekâ Kullanımı
+# 🤖 Yapay Zekâ Kullanımı
 
-Bu proje kapsamında konu kurgusu, veri birleştirme mantığı, R/Quarto kod iskeleti, grafiklerin düzenlenmesi, modelleme yaklaşımı ve yorum taslaklarının geliştirilmesi aşamalarında ChatGPT'den destek alınmıştır. Oluşturulan içerik akademik muhakeme süzgecinden geçirilerek düzenlenmiştir.
+Bu proje kapsamında konu kurgusu, veri birleştirme mantığı, R/Quarto kod iskeleti, grafik yorumlarının düzenlenmesi, senaryo analizi mantığının geliştirilmesi ve rapor metninin sadeleştirilmesi aşamalarında ChatGPT'den yardımcı araç olarak yararlanılmıştır. Nihai analiz, grafikler ve yorumlar grup üyeleri tarafından kontrol edilerek düzenlenmiştir.
 
 Kullanılan istem örnekleri:
 
-> "Ankara'da su kullanım verilerini inceleyerek önümüzdeki aylarda baraj doluluk oranını tahmin eden bir model geliştirmek istiyorum."
+> "Ankara'da su kullanım verilerini, yağış verilerini ve barajlara gelen su miktarını birlikte analiz eden bir Quarto proje yapısı hazırla."
 
-> "Tüm veri setlerini birleştirip tek bir Quarto ödev dosyası hazırla."
+> "Baraj doluluk oranı için kesin tahmin modeli kurmadan, kurak-normal-iyimser senaryo analizi nasıl açıklanır?"
+
+
