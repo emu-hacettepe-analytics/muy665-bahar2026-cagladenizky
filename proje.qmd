@@ -1,7 +1,7 @@
 ---
-title: "Ankara'da Su Kullanımı, Yağış ve Baraj Doluluk Durumu Analizi"
-author: "Parlayan Yıldızlar Takımı"
-date: "2026-05-21"
+title: "Ankara'da Su Kullanımı, Yağış ve Baraj Doluluk Durumunun Analizi"
+authors: "Beril Özhan / Çağla Deniz Yiğin / Nihal Turan / Zeynep Sena Yılmaz"
+date: "2026-06-10"
 number-sections: true
 format:
   html:
@@ -15,6 +15,8 @@ execute:
   warning: false
   message: false
 ---
+
+![](assets/images/kapak_gorseli.jpeg){fig-align="center" width="60%"}
 
 **Projemizle ilgili güncellemelerden haberdar olmak için proje sayfamızı takip edebilirsiniz.**
 
