@@ -44,6 +44,7 @@ library(DT)
 
 datatable(
   polls_us_election_2016,
+  style = "bootstrap5",
   class = "compact",
   options = list(
     pageLength = 25,

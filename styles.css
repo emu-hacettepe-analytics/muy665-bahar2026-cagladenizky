@@ -1,28 +1,228 @@
-/* css styles */
-h1 {
-  font-size: 32px;
-  color: #0b1f8a;   /* koyu mavi */
-  font-weight: bold;
-  margin-bottom: 10px;
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #4b5563;
+  line-height: 1.65;
+  font-size: 15.5px;
+  background-color: #ffffff;
 }
 
-h2 {
-  font-size: 24px;
-  color: #1e40ff;
-  margin-top: 20px;
-  margin-bottom: 8px;
-  font-weight: normal;
+/* Quarto varsayılan ayırıcıları kapat */
+.quarto-title-block,
+#title-block-header {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
-/* PARAGRAF BOŞLUKLARINI KALDIR */
-p {
-  margin-top: 0;
-  margin-bottom: 0;
+
+.quarto-title-block .quarto-title-banner,
+.quarto-title-block .quarto-title-meta,
+#title-block-header .quarto-title-meta {
+  display: none !important;
+}
+
+#title-block-header::after,
+.quarto-title-block::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Sayfa başlığı */
+#title-block-header {
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#title-block-header h1.title {
+  color: #3f4f6f;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-top: 0 !important;
+  margin-bottom: 0.35rem !important;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #8aa6d8;
+  letter-spacing: 0.2px;
+}
+
+/* İçerik alanı */
+main.content {
+  padding-top: 0.2rem !important;
+  max-width: 1150px;
+}
+
+/* Üst rol satırı */
+.role-line {
+  color: #6b7a90;
+  font-size: 1.05rem;
+  font-style: italic;
+  margin-top: -0.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Giriş kutusu */
+.intro-block {
+  border-left: 4px solid #d7e2f5;
+  padding-left: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Butonlar */
+.action-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.action-button {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  background-color: #5d7bb5;
+  color: #ffffff !important;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #3f4f6f;
+  text-decoration: none;
+}
+
+.action-button.secondary {
+  background-color: #eef3fb;
+  color: #3f4f6f !important;
+  border: 1px solid #d7e2f5;
+}
+
+.action-button.secondary:hover {
+  background-color: #dde8f8;
+}
+
+/* Bölüm başlıkları */
+h2 {
+  color: #3f4f6f;
+  font-weight: 600;
+  font-size: 1.45rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #a7bce3;
 }
 
 h3 {
-  font-size: 18px;
-  color: #1e40ff;
-  margin-top: 20px;
-  margin-bottom: 8px;
-  font-weight: normal;
+  color: #5d7bb5;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+}
+
+p {
+  margin-bottom: 0.9rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
+
+ul li::marker {
+  color: #8aa6d8;
+}
+
+strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+a {
+  color: #5d7bb5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3f4f6f;
+  text-decoration: underline;
+}
+
+hr {
+  display: none !important;
+}
+
+/* İki sütun */
+.columns-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.55fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+/* Sol sütun kutuları */
+.left-column .section-box {
+  background: #f8fafc;
+  border: 1px solid #e5edf8;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.left-column .section-box h2 {
+  margin-top: 0;
+}
+
+/* Sağ sütun blokları */
+.right-column .entry-block {
+  margin-bottom: 1.15rem;
+}
+
+.entry-title {
+  color: #374151;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.1rem;
+}
+
+.entry-subtitle {
+  color: #6b7280;
+  font-size: 0.96rem;
+  margin-bottom: 0.1rem;
+}
+
+.entry-date {
+  color: #8b95a7;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+/* Mobil */
+@media (max-width: 900px) {
+  body {
+    font-size: 15px;
+  }
+
+  #title-block-header h1.title {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .role-line {
+    font-size: 1rem;
+  }
+
+  .columns-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
